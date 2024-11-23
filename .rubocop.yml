@@ -1,0 +1,25 @@
+inherit_from: /home/thelazyprogrammer/.asdf/installs/ruby/3.3.4/lib/ruby/gems/3.3.0/gems/rubocop-1.65.1/config/default.yml
+
+# Omakase Ruby styling for Rails
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+
+# Overwrite or add rules to create your own house style
+#
+# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
+# Layout/SpaceInsideArrayLiteralBrackets:
+#   Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
