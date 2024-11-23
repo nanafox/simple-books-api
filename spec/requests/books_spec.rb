@@ -77,9 +77,9 @@ RSpec.describe "Books API", type: :request do
                 author_name: "John Doe",
                 author_age: 23,
                 created_at: book.created_at.iso8601(3),
-                updated_at: book.updated_at.iso8601(3),
-              },
-            ],
+                updated_at: book.updated_at.iso8601(3)
+              }
+            ]
           }
         )
       end
@@ -98,7 +98,7 @@ RSpec.describe "Books API", type: :request do
             success: true,
             total_books: 2,
             current_number: 0,
-            data: [],
+            data: []
           }
         )
       end
@@ -113,7 +113,7 @@ RSpec.describe "Books API", type: :request do
       post(
         api_v1_books_url,
         params: {
-          book: { title: "My new book" },
+          book: { title: "My new book" }
         }, headers:,
       )
 
@@ -128,7 +128,7 @@ RSpec.describe "Books API", type: :request do
       post(
         api_v1_books_url,
         params: {
-          author: { 'first_name': "Rob", last_name: "Fitzpatrick", age: 45 },
+          author: { 'first_name': "Rob", last_name: "Fitzpatrick", age: 45 }
         }, headers:,
       )
 
@@ -144,7 +144,7 @@ RSpec.describe "Books API", type: :request do
         api_v1_books_url,
         params: {
           book: { title: "The Mom Test" },
-          author: { 'first_name': "Rob", last_name: "Fitzpatrick", age: 45 },
+          author: { 'first_name': "Rob", last_name: "Fitzpatrick", age: 45 }
         }, headers:,
       )
 
@@ -164,8 +164,8 @@ RSpec.describe "Books API", type: :request do
             author_name: "Rob Fitzpatrick",
             author_age: 45,
             created_at: new_book.created_at.iso8601(3),
-            updated_at: new_book.updated_at.iso8601(3),
-          },
+            updated_at: new_book.updated_at.iso8601(3)
+          }
         }
       )
     end
@@ -217,7 +217,7 @@ RSpec.describe "Books API", type: :request do
     describe "PUT /api/v1/books/:id" do
       it "updates the book with valid attributes" do
         put api_v1_book_url(book.id), params: {
-                                        book: { title: "Updated Title" },
+                                        book: { title: "Updated Title" }
                                       }
 
         expect(response).to have_http_status(:ok)
@@ -238,7 +238,7 @@ RSpec.describe "Books API", type: :request do
       it "partially updates the book" do
         patch api_v1_book_url(book.id),
               params: {
-                book: { title: "A Very New Title" },
+                book: { title: "A Very New Title" }
               }
 
         expect(response).to have_http_status(:ok)

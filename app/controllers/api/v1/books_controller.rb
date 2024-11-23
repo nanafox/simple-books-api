@@ -21,6 +21,8 @@ module Api
         render json: BooksRepresenter.new(@book, request).as_json
       end
 
+      # rubocop:disable Metrics/MethodLength
+
       # Create a new book in the database.
       # Duplicate books from the same author are not allowed
       def create
@@ -34,7 +36,7 @@ module Api
 
         if db_book
           render json: {
-                   error: "A book with this title and author already exists",
+                   error: "A book with this title and author already exists"
                  }, status: :conflict
           return
         end
@@ -48,6 +50,8 @@ module Api
                  status: :unprocessable_content
         end
       end
+
+      # rubocop:enable Metrics/MethodLength
 
       def update
         if @book.update(book_params)
@@ -68,7 +72,7 @@ module Api
       def limit
         [
           params.fetch(:limit, MAX_PAGINATION_LIMIT).to_i,
-          MAX_PAGINATION_LIMIT,
+          MAX_PAGINATION_LIMIT
         ].min
       end
 
@@ -76,12 +80,13 @@ module Api
         params.require(:book).permit(:title, :author_id)
       end
 
+      # rubocop:disable Metrics/MethodLength
       def set_book
         if params[:author_id]
           @book = Book.find_by(id: params[:id], author: @author)
           if @book.nil?
             return render json: {
-                            error: "Book not found for the given author",
+                            error: "Book not found for the given author"
                           }, status: :not_found
           end
         else
@@ -89,11 +94,13 @@ module Api
         end
 
         if @book.nil?
-          return render json: {
-                          error: "Couldn't find Book with 'id'=#{params[:id]}",
-                        }, status: :not_found
+          render json: {
+                   error: "Couldn't find Book with 'id'=#{params[:id]}"
+                 }, status: :not_found
         end
       end
+
+      # rubocop:enable Metrics/MethodLength
 
       def set_author
         return unless params[:author_id]
@@ -101,9 +108,9 @@ module Api
         @author = Author.find_by(id: author_id)
 
         if @author.nil?
-          return render json: {
-                          error: "Author with ID #{author_id} not found.",
-                        }, status: :not_found
+          render json: {
+                   error: "Author with ID #{author_id} not found."
+                 }, status: :not_found
         end
       end
 

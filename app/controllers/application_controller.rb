@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
 
   def invalid_route
     render json: {
-      error: 'Route not found',
+      error: "Route not found",
       endpoint: request.path,
       method: request.method
     }, status: :not_found
