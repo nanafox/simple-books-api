@@ -19,7 +19,6 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-
 development:
   <<: *default
   database: simple_books_api_development
@@ -57,6 +56,9 @@ development:
 test:
   <<: *default
   database: simple_books_api_test
+  host: localhost
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
